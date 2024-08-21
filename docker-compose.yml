@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build:
@@ -19,7 +21,6 @@ services:
     networks:
       - app-network
 
-    
   postgres:
     image: postgres:16.3
     ports:
@@ -29,4 +30,8 @@ services:
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
     networks:
-      - app-network
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
