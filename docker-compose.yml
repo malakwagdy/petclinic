@@ -11,6 +11,15 @@ services:
       - POSTGRES_DB=petclinic
       - POSTGRES_URL=jdbc:postgresql://postgres:5432/petclinic
       - SPRING_PROFILES_ACTIVE=postgres
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+    
   postgres:
     image: postgres:16.3
     ports:
@@ -19,3 +28,5 @@ services:
       - POSTGRES_PASSWORD=petclinic
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
+    networks:
+      - app-network
